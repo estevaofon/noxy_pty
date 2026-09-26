@@ -1,11 +1,19 @@
-// examples/smoke.nx — abre um shell, roda um echo, le a saida e fecha:
+// examples/smoke.nx — abre um shell, roda um comando, le a saida e fecha:
 //     noxy examples/smoke.nx      (de um projeto com a extensao em noxy_libs)
+// No Linux e no macOS o shell e o /bin/sh; no Windows, o cmd.exe do COMSPEC.
+// A linha digitada nao contem "ok_42": so a saida do comando contem.
 use sys
 use strings
 use github_com.estevaofon.noxy_pty.noxy_pty as pty
 
-let id: int = pty.open("/bin/sh", sys.getcwd(), 80, 24)
-pty.write(id, base64_encode("echo ok_$((20+22))\n"))
+let shell: string = "/bin/sh"
+let command: string = "echo ok_$((20+22))\n"
+if sys.os() == "windows" then
+    shell = sys.getenv("COMSPEC").value
+    command = "for /f %i in ('set /a 20+22') do @echo ok_%i\r"
+end
+let id: int = pty.open(shell, sys.getcwd(), 80, 24)
+pty.write(id, base64_encode(command))
 let out: string = ""
 let tries = 0
 while !strings.contains(out, "ok_42") && tries < 20 do
