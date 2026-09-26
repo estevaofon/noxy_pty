@@ -1,0 +1,21 @@
+// examples/smoke.nx — abre um shell, roda um echo, le a saida e fecha:
+//     noxy examples/smoke.nx      (de um projeto com a extensao em noxy_libs)
+use sys
+use strings
+use github_com.estevaofon.noxy_pty.noxy_pty as pty
+
+let id: int = pty.open("/bin/sh", sys.getcwd(), 80, 24)
+pty.write(id, base64_encode("echo ok_$((20+22))\n"))
+let out: string = ""
+let tries = 0
+while !strings.contains(out, "ok_42") && tries < 20 do
+    out = out + to_str(base64_decode(pty.read(id, 250)))
+    tries = tries + 1
+end
+pty.close(id)
+if strings.contains(out, "ok_42") then
+    print("ok")
+else
+    print("falhou: " + out)
+    sys.exit(1)
+end

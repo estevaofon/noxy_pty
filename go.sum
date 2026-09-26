@@ -1,2 +1,4 @@
 github.com/creack/pty v1.1.24 h1:bJrF4RRfyJnbTJqzRLHzcGaZK1NeM5kTC9jGgovnR1s=
 github.com/creack/pty v1.1.24/go.mod h1:08sCNb52WyoAwi2QDyzUCTgcvVFhUzewun7wtTfvcwE=
+github.com/estevaofon/noxy/sdk/noxyplugin v0.1.0 h1:4BCIg+faFDAIhaiB40cKxn9SnzcBIdFoV0LVR7OOJ38=
+github.com/estevaofon/noxy/sdk/noxyplugin v0.1.0/go.mod h1:8JFy0k46p+HbFooarVYvqyL1YVyOX4h1JyuwESHk7dM=

@@ -1,0 +1,24 @@
+# Release da extensao noxy_pty: Go puro, entao um runner compila todas as
+# plataformas e publica os binarios e o checksums.txt na tag.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: go test ./... -race
+      - run: sh release/build.sh pty
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*

@@ -1,0 +1,29 @@
+// noxy_pty.nx — wrapper tipado da extensao `pty`: terminais de verdade
+// (pty) para programas Noxy. Os dados cruzam em base64 (bytes de terminal
+// nao sao UTF-8 garantido). Toda falha e um erro de runtime
+// `extension 'pty' failed: <motivo>`, capturavel com call_result; o fim do
+// processo e a falha "pty N exited" em read.
+
+// open abre cmd numa pty com o diretorio e o tamanho dados; devolve o id.
+func open(cmd: string, cwd: string, cols: int, rows: int) -> int
+    return pty_open(cmd, cwd, cols, rows)
+end
+
+// read espera ate timeout_ms por saida; devolve base64 ("" no timeout).
+func read(id: int, timeout_ms: int) -> string
+    return pty_read(id, timeout_ms)
+end
+
+// write escreve bytes (em base64) na entrada do terminal.
+func write(id: int, data_b64: string) -> void
+    pty_write(id, data_b64)
+end
+
+func resize(id: int, cols: int, rows: int) -> void
+    pty_resize(id, cols, rows)
+end
+
+// close mata o processo e fecha o terminal; idempotente.
+func close(id: int) -> void
+    pty_close(id)
+end

@@ -1,0 +1,40 @@
+name = "pty"
+abi = 1
+kind = "process"
+min_noxy = "0.25.0"
+concurrency = "concurrent"      # read bloqueia; write e resize precisam passar
+capabilities = ["process"]
+
+[binaries]                      # release assets; noxy --get baixa o do seu OS/arch
+linux-amd64   = "noxy-plugin-pty-linux-amd64"
+linux-arm64   = "noxy-plugin-pty-linux-arm64"
+windows-amd64 = "noxy-plugin-pty-windows-amd64.exe"
+darwin-amd64  = "noxy-plugin-pty-darwin-amd64"
+darwin-arm64  = "noxy-plugin-pty-darwin-arm64"
+
+[[export]]
+name = "pty_open"               # (cmd, cwd, cols, rows) -> id
+params = ["string", "string", "int", "int"]
+returns = "int"
+stateful = true
+
+[[export]]
+name = "pty_read"               # (id, timeout_ms) -> base64; "" no timeout; erro "pty N exited" no fim
+params = ["int", "int"]
+returns = "string"
+timeout_ms = 0
+
+[[export]]
+name = "pty_write"              # (id, base64)
+params = ["int", "string"]
+returns = "void"
+
+[[export]]
+name = "pty_resize"             # (id, cols, rows)
+params = ["int", "int", "int"]
+returns = "void"
+
+[[export]]
+name = "pty_close"              # mata o processo e fecha; idempotente
+params = ["int"]
+returns = "void"
