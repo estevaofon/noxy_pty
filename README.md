@@ -1,9 +1,9 @@
 # noxy_pty
 
-Terminais de verdade (pty) para programas [Noxy](https://github.com/estevaofon/noxy),
+Terminais de verdade (pty) para programas [Noxy](https://github.com/noxylang/noxy),
 como extensão por processo: [creack/pty](https://github.com/creack/pty) no
 Linux e no macOS, ConPTY (pseudoconsole) no Windows. Feita para o terminal do
-[Noxy Editor](https://github.com/estevaofon/Noxy-Editor); serve para qualquer
+[Noxy Editor](https://github.com/noxylang/Noxy-Editor); serve para qualquer
 programa Noxy que precise rodar um shell ou um programa interativo e ler e
 escrever nele.
 
