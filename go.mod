@@ -1,4 +1,4 @@
-module github.com/estevaofon/noxy_pty
+module github.com/noxylang/noxy_pty
 
 go 1.25.0
 

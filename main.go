@@ -12,7 +12,7 @@ import (
 
 	"github.com/estevaofon/noxy/sdk/noxyplugin"
 
-	"github.com/estevaofon/noxy_pty/ptys"
+	"github.com/noxylang/noxy_pty/ptys"
 )
 
 func main() {
