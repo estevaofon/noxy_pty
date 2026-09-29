@@ -1,15 +1,15 @@
 # noxy_pty
 
-Terminais de verdade (pty) para programas [Noxy](https://github.com/estevaofon/noxy),
+Terminais de verdade (pty) para programas [Noxy](https://github.com/noxylang/noxy),
 como extensão por processo: [creack/pty](https://github.com/creack/pty) no
 Linux e no macOS, ConPTY (pseudoconsole) no Windows. Feita para o terminal do
-[Noxy Editor](https://github.com/estevaofon/Noxy-Editor); serve para qualquer
+[Noxy Editor](https://github.com/noxylang/Noxy-Editor); serve para qualquer
 programa Noxy que precise rodar um shell ou um programa interativo e ler e
 escrever nele.
 
 ## Instalação
 
-    noxy --get github.com/estevaofon/noxy_pty
+    noxy --get github.com/noxylang/noxy_pty
 
 Binários para Linux (amd64, arm64), macOS (Intel, Apple Silicon) e Windows
 (amd64). Requer Noxy 0.25.0 ou mais novo; no Windows, a versão 10 1809 ou
@@ -19,7 +19,7 @@ com o erro do `CreatePseudoConsole`.
 ## API
 
 ```noxy
-use github_com.estevaofon.noxy_pty.noxy_pty as pty
+use github_com.noxylang.noxy_pty.noxy_pty as pty
 
 let id: int = pty.open("/bin/sh", "/tmp", 80, 24)
 pty.write(id, base64_encode("echo ola\n"))
@@ -52,9 +52,9 @@ No Windows, `go build -o bin/noxy-plugin-pty-windows-amd64.exe .`; o
 no pacote `ptys/`, testado com um processo falso e com um shell real; o
 processo de cada plataforma está em `starter_unix.go` e `starter_windows.go`.
 Para usar um checkout num projeto, linke-o em
-`<projeto>/noxy_libs/github_com/estevaofon/noxy_pty` (no Windows, uma junção:
+`<projeto>/noxy_libs/github_com/noxylang/noxy_pty` (no Windows, uma junção:
 `mklink /J`); então
-`noxy noxy_libs/github_com/estevaofon/noxy_pty/examples/smoke.nx` imprime `ok`.
+`noxy noxy_libs/github_com/noxylang/noxy_pty/examples/smoke.nx` imprime `ok`.
 
 A CI (`.github/workflows/ci.yml`) roda os testes no Ubuntu e no Windows.
 Release: push de uma tag `vX.Y.Z`. Tudo é Go puro (`creack/pty` e
